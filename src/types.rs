@@ -1,14 +1,14 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct ClassResponse {
-    pub response: Vec<Class>,
+pub struct Response<T> {
+    pub response: Vec<T>,
     pub status_code: Option<i64>,
     pub status_message: Option<String>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct Class {
+pub struct Course {
     pub id: Option<String>,
     pub code: Option<String>,
     pub name: Option<String>,
@@ -27,12 +27,12 @@ pub struct Class {
     pub utm_distribution: Option<String>,
     pub utsc_breadth: Option<String>,
     pub apsc_electives: Option<String>,
-    pub meeting_sections: Vec<MeetingSection>,
+    pub meeting_sections: Vec<CoursesMeetingSection>,
     pub last_updated: Option<String>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct MeetingSection {
+pub struct CoursesMeetingSection {
     pub code: Option<String>,
     pub instructors: Vec<Option<String>>,
     pub times: Vec<Time>,
@@ -49,4 +49,32 @@ pub struct Time {
     pub end: Option<i64>,
     pub duration: Option<i64>,
     pub location: Option<String>,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Textbook {
+    pub id: Option<String>,
+    pub isbn: Option<String>,
+    pub title: Option<String>,
+    pub edition: Option<i64>,
+    pub author: Option<String>,
+    pub image: Option<String>,
+    pub price: Option<f64>,
+    pub url: Option<String>,
+    pub courses: Vec<Option<TextbooksCourse>>,
+    pub last_updated: Option<String>,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct TextbooksCourse {
+    pub id: Option<String>,
+    pub code: Option<String>,
+    pub requirement: Option<String>,
+    pub meeting_sections: Vec<Option<TextbooksMeetingSection>>,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct TextbooksMeetingSection {
+    pub code: Option<String>,
+    pub instructors: Vec<Option<String>>,
 }
