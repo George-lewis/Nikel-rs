@@ -1,8 +1,5 @@
 # Nikel-rs
 
-![](https://badgen.net/crates/v/nikel-rs)
-![](https://badgen.net/crates/d/nikel-rs)
-
 ![Crates.io](https://img.shields.io/crates/d/nikel-rs)
 ![Crates.io](https://img.shields.io/crates/v/nikel-rs)
 ![Crates.io](https://img.shields.io/crates/l/nikel-rs)
