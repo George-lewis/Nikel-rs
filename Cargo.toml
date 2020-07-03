@@ -7,8 +7,6 @@ description = "A library for interfacing with https://nikel.ml"
 repository = "https://github.com/George-lewis/Nikel-rs"
 license = "MIT"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
 reqwest = { version = "0.10", features = ["blocking", "json"] }
 serde = { version = "1.0", features = ["derive"] }
