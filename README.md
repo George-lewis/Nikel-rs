@@ -22,3 +22,5 @@ if resp.status_code == 200 {
   println!("Error!");
 }
 ```
+
+See [Nikel-CLI](https://github.com/George-lewis/Nikel-CLI) for a more complete example
