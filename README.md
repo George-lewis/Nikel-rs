@@ -11,11 +11,10 @@ A Rust library for interacting with the UofT API Nikel: http://nikel.ml
 ```rust
 use std::vec:Vec;
 use nikel_rs::NikelAPI;
-use nikel_rs::*;
 
 let client = NikelAPI::Client::new(); // Create client
 let opts: Vec<(&str, &str)> = vec![("code", "CSC108"), ("campus", "mississauga")] // Query options
-let resp = client.courses(opts).unwrap(); // Get
+let resp = client.courses(opts).expect("Error!"); // Get
 if resp.status_code == 200 {
   println!("{}", resp.response[0].description); // Print course description
 } else {
