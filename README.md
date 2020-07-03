@@ -16,7 +16,7 @@ let client = NikelAPI::Client::new(); // Create client
 let opts: Vec<(&str, &str)> = vec![("code", "CSC108"), ("campus", "mississauga")] // Query options
 let resp = client.courses(opts).expect("Error!"); // Get
 if resp.status_code == 200 {
-  println!("{}", resp.response[0].description); // Print course description
+  println!("{}", resp.response[0].description); // Print the first course's description
 } else {
   println!("Error!");
 }
