@@ -9,12 +9,12 @@ A Rust library for interacting with the UofT API Nikel: http://nikel.ml
 # Usage
 
 ```rust
-use std::collections
+use std::vec:Vec;
 use nikel_rs::NikelAPI;
 use nikel_rs::*;
 
 let client = NikelAPI::Client::new(); // Create client
-let opts: HashMap<&str, &str> = [("code", "CSC108"),
+let opts: Vec<(&str, &str)> = [("code", "CSC108"),
                                 ("campus", "mississauga")]
                                  .iter()
                                  .clone()
