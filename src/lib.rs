@@ -129,7 +129,7 @@ pub struct Textbook {
     pub image: Option<String>,
     pub price: Option<f64>,
     pub url: Option<String>,
-    pub courses: Vec<Option<TextbooksCourse>>,
+    pub courses: Vec<TextbooksCourse>,
     pub last_updated: Option<String>,
 }
 
@@ -138,13 +138,13 @@ pub struct TextbooksCourse {
     pub id: Option<String>,
     pub code: Option<String>,
     pub requirement: Option<String>,
-    pub meeting_sections: Vec<Option<TextbooksMeetingSection>>,
+    pub meeting_sections: Vec<TextbooksMeetingSection>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct TextbooksMeetingSection {
     pub code: Option<String>,
-    pub instructors: Vec<Option<String>>,
+    pub instructors: Vec<String>,
 }
 
 // [ EXAMS ]
@@ -212,13 +212,13 @@ pub struct Food {
     pub tags: Option<String>,
     pub campus: Option<String>,
     pub address: Option<String>,
-    pub coordinates: Option<Coordinates>,
-    pub hours: Option<Hours>,
+    pub coordinates: Coordinates,
+    pub hours: Hours,
     pub image: Option<String>,
     pub url: Option<String>,
     pub twitter: Option<String>,
     pub facebook: Option<String>,
-    pub attributes: Vec<Option<String>>,
+    pub attributes: Vec<String>,
     pub last_updated: Option<String>,
 }
 
@@ -296,7 +296,7 @@ pub struct Service {
     pub image: Option<String>,
     pub coordinates: Option<Coordinates>,
     pub tags: Option<String>,
-    pub attributes: Vec<Option<String>>,
+    pub attributes: Vec<String>,
     pub last_updated: Option<String>,
 }
 
@@ -309,8 +309,8 @@ pub struct Building {
     pub tags: Option<String>,
     pub name: Option<String>,
     pub short_name: Option<String>,
-    pub address: Option<BuildingAddress>,
-    pub coordinates: Option<Coordinates>,
+    pub address: BuildingAddress,
+    pub coordinates: Coordinates,
     pub last_updated: Option<String>,
 }
 
@@ -334,7 +334,7 @@ pub struct Parking {
     pub description: Option<String>,
     pub campus: Option<String>,
     pub address: Option<String>,
-    pub coordinates: Option<Coordinates>,
+    pub coordinates: Coordinates,
     pub last_updated: Option<String>,
 }
 
