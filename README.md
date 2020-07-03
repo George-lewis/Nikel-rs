@@ -1,5 +1,9 @@
 # Nikel-rs
 
+![Crates.io](https://img.shields.io/crates/d/nikel-rs)
+![Crates.io](https://img.shields.io/crates/v/nikel-rs)
+![Crates.io](https://img.shields.io/crates/l/nikel-rs)
+
 A Rust library for interacting with the UofT API Nikel: http://nikel.ml
 
 # Usage
