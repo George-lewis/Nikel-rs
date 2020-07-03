@@ -61,18 +61,9 @@ impl NikelAPI {
 
 }
 
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct Exam{}
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct Eval{}
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct Food{}
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct Service{}
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct Building{}
-#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
-pub struct Parking{}
+// [ BEGIN DATA TYPES ]
+
+// [ RESPONSE STRUCT ]
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Response<T> {
@@ -80,6 +71,8 @@ pub struct Response<T> {
     pub status_code: Option<i64>,
     pub status_message: Option<String>,
 }
+
+// [ COURSES ]
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Course {
@@ -108,7 +101,7 @@ pub struct Course {
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct CoursesMeetingSection {
     pub code: Option<String>,
-    pub instructors: Vec<Option<String>>,
+    pub instructors: Vec<String>,
     pub times: Vec<Time>,
     pub size: Option<i64>,
     pub enrollment: Option<i64>,
@@ -124,6 +117,8 @@ pub struct Time {
     pub duration: Option<i64>,
     pub location: Option<String>,
 }
+
+// [ TEXTBOOKS ]
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Textbook {
@@ -151,4 +146,201 @@ pub struct TextbooksCourse {
 pub struct TextbooksMeetingSection {
     pub code: Option<String>,
     pub instructors: Vec<Option<String>>,
+}
+
+// [ EXAMS ]
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Exam {
+    pub id: Option<String>,
+    pub course_id: Option<String>,
+    pub course_code: Option<String>,
+    pub campus: Option<String>,
+    pub date: Option<String>,
+    pub start: Option<i64>,
+    pub end: Option<i64>,
+    pub duration: Option<i64>,
+    pub sections: Vec<ExamSection>,
+    pub last_updated: Option<String>,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct ExamSection {
+    pub lecture_code: Option<String>,
+    pub split: Option<String>,
+    pub location: Option<String>,
+}
+
+// [ EVALS ]
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Eval {
+    pub id: Option<String>,
+    pub name: Option<String>,
+    pub campus: Option<String>,
+    pub terms: Vec<EvalTerm>,
+    pub last_updated: Option<String>,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct EvalTerm {
+    pub term: Option<String>,
+    pub lectures: Vec<EvalLecture>,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct EvalLecture {
+    pub lecture_code: Option<String>,
+    pub firstname: Option<String>,
+    pub lastname: Option<String>,
+    pub s1: Option<f64>,
+    pub s2: Option<f64>,
+    pub s3: Option<f64>,
+    pub s4: Option<f64>,
+    pub s5: Option<f64>,
+    pub s6: Option<f64>,
+    pub invited: Option<i64>,
+    pub responses: Option<i64>,
+}
+
+// [ FOOD ]
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Food {
+    pub id: Option<String>,
+    pub name: Option<String>,
+    pub description: Option<String>,
+    pub tags: Option<String>,
+    pub campus: Option<String>,
+    pub address: Option<String>,
+    pub coordinates: Option<Coordinates>,
+    pub hours: Option<Hours>,
+    pub image: Option<String>,
+    pub url: Option<String>,
+    pub twitter: Option<String>,
+    pub facebook: Option<String>,
+    pub attributes: Vec<Option<String>>,
+    pub last_updated: Option<String>,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Hours {
+    pub sunday: Sunday,
+    pub monday: Monday,
+    pub tuesday: Tuesday,
+    pub wednesday: Wednesday,
+    pub thursday: Thursday,
+    pub friday: Friday,
+    pub saturday: Saturday,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Sunday {
+    pub closed: Option<bool>,
+    pub open: Option<i64>,
+    pub close: Option<i64>,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Monday {
+    pub closed: Option<bool>,
+    pub open: Option<i64>,
+    pub close: Option<i64>,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Tuesday {
+    pub closed: Option<bool>,
+    pub open: Option<i64>,
+    pub close: Option<i64>,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Wednesday {
+    pub closed: Option<bool>,
+    pub open: Option<i64>,
+    pub close: Option<i64>,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Thursday {
+    pub closed: Option<bool>,
+    pub open: Option<i64>,
+    pub close: Option<i64>,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Friday {
+    pub closed: Option<bool>,
+    pub open: Option<i64>,
+    pub close: Option<i64>,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Saturday {
+    pub closed: Option<bool>,
+    pub open: Option<i64>,
+    pub close: Option<i64>,
+}
+
+// [ SERVICES ]
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Service {
+    pub id: Option<String>,
+    pub name: Option<String>,
+    pub alias: Option<String>,
+    pub building_id: Option<String>,
+    pub description: Option<String>,
+    pub campus: Option<String>,
+    pub address: Option<String>,
+    pub image: Option<String>,
+    pub coordinates: Option<Coordinates>,
+    pub tags: Option<String>,
+    pub attributes: Vec<Option<String>>,
+    pub last_updated: Option<String>,
+}
+
+// [ BUILDINGS ]
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Building {
+    pub id: Option<String>,
+    pub code: Option<String>,
+    pub tags: Option<String>,
+    pub name: Option<String>,
+    pub short_name: Option<String>,
+    pub address: Option<BuildingAddress>,
+    pub coordinates: Option<Coordinates>,
+    pub last_updated: Option<String>,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct BuildingAddress {
+    pub street: Option<String>,
+    pub city: Option<String>,
+    pub province: Option<String>,
+    pub country: Option<String>,
+    pub postal: Option<String>,
+}
+
+// [ PARKING ]
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Parking {
+    pub id: Option<String>,
+    pub name: Option<String>,
+    pub alias: Option<String>,
+    pub building_id: Option<String>,
+    pub description: Option<String>,
+    pub campus: Option<String>,
+    pub address: Option<String>,
+    pub coordinates: Option<Coordinates>,
+    pub last_updated: Option<String>,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Coordinates {
+    pub latitude: Option<f64>,
+    pub longitude: Option<f64>,
 }
