@@ -5,7 +5,7 @@ use std::fmt::Display;
 use serde::{Serialize, Deserialize};
 use serde::de::DeserializeOwned;
 use reqwest::blocking::Client;
-pub use reqwest::Error;
+use reqwest::Error;
 
 pub type Parameters<'a> = Vec<(&'a str, &'a str)>;
 
@@ -32,7 +32,7 @@ impl NikelAPI {
         format!("https://nikel.ml/api/{}?{}", endpoint, NikelAPI::encode_params(params))
     }
 
-    fn get<T: DeserializeOwned>(&self, endpoint: String, params: Parameters) -> Result<Response<T>, reqwest::Error> {
+    fn get<T: DeserializeOwned>(&self, endpoint: String, params: Parameters) -> Result<Response<T>, Error> {
         self.client.get(&NikelAPI::get_url(endpoint, params)).send()?.json::<Response<T>>()
     }
 
