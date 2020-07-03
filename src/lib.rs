@@ -5,7 +5,7 @@ use std::fmt::Display;
 use serde::{Serialize, Deserialize};
 use serde::de::DeserializeOwned;
 use reqwest::blocking::Client;
-use reqwest::Error;
+pub use reqwest::Error;
 
 pub type Parameters<'a> = Vec<(&'a str, &'a str)>;
 
