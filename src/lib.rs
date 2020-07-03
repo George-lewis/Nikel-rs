@@ -5,7 +5,6 @@ use reqwest::blocking::Client;
 use reqwest::Error;
 
 pub type Parameters<'a> = HashMap<&'a str, &'a str>;
-pub type _Response<T> = Result<Response<T>, reqwest::Error>;
 
 pub struct NikelAPI {
     client: Client
