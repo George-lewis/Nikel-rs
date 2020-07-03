@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::vec::Vec;
 use std::fmt;
 use std::fmt::Display;
 
@@ -7,7 +7,7 @@ use serde::de::DeserializeOwned;
 use reqwest::blocking::Client;
 use reqwest::Error;
 
-pub type Parameters<'a> = HashMap<&'a str, &'a str>;
+pub type Parameters<'a> = Vec<(&'a str, &'a str)>;
 
 pub struct NikelAPI {
     client: Client
