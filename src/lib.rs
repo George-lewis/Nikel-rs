@@ -1,9 +1,8 @@
 use std::vec::Vec;
-use std::fmt;
-use std::fmt::Display;
 
 use serde::{Serialize, Deserialize};
 use serde::de::DeserializeOwned;
+
 use reqwest::blocking::Client;
 use reqwest::Error;
 
@@ -65,104 +64,88 @@ impl NikelAPI {
 
 // [ BEGIN DATA TYPES ]
 
-// For the sake of printing
-#[derive(Default, Clone, Serialize, Deserialize)]
-pub struct OptionWrapper<T>(Option<T>);
-
-impl<T: Display> fmt::Debug for OptionWrapper<T> {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let output: String;
-        if self.0.is_none() {
-            output = "Unknown".to_string()
-        } else {
-            output = format!("{}", self.0.as_ref().unwrap())
-        }
-        write!(f, "{}", output)
-    }
-}
-
 // [ RESPONSE STRUCT ]
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct Response<T> {
     pub response: Vec<T>,
-    pub status_code: OptionWrapper<i64>,
-    pub status_message: OptionWrapper<String>,
+    pub status_code: Option<i64>,
+    pub status_message: Option<String>,
 }
 
 // [ COURSES ]
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct Course {
-    pub id: OptionWrapper<String>,
-    pub code: OptionWrapper<String>,
-    pub name: OptionWrapper<String>,
-    pub description: OptionWrapper<String>,
-    pub division: OptionWrapper<String>,
-    pub department: OptionWrapper<String>,
-    pub prerequisites: OptionWrapper<String>,
-    pub corequisites: OptionWrapper<String>,
-    pub exclusions: OptionWrapper<String>,
-    pub recommended_preparation: OptionWrapper<String>,
-    pub level: OptionWrapper<String>,
-    pub campus: OptionWrapper<String>,
-    pub term: OptionWrapper<String>,
-    pub arts_and_science_breadth: OptionWrapper<String>,
-    pub arts_and_science_distribution: OptionWrapper<String>,
-    pub utm_distribution: OptionWrapper<String>,
-    pub utsc_breadth: OptionWrapper<String>,
-    pub apsc_electives: OptionWrapper<String>,
+    pub id: Option<String>,
+    pub code: Option<String>,
+    pub name: Option<String>,
+    pub description: Option<String>,
+    pub division: Option<String>,
+    pub department: Option<String>,
+    pub prerequisites: Option<String>,
+    pub corequisites: Option<String>,
+    pub exclusions: Option<String>,
+    pub recommended_preparation: Option<String>,
+    pub level: Option<String>,
+    pub campus: Option<String>,
+    pub term: Option<String>,
+    pub arts_and_science_breadth: Option<String>,
+    pub arts_and_science_distribution: Option<String>,
+    pub utm_distribution: Option<String>,
+    pub utsc_breadth: Option<String>,
+    pub apsc_electives: Option<String>,
     pub meeting_sections: Vec<CoursesMeetingSection>,
-    pub last_updated: OptionWrapper<String>,
+    pub last_updated: Option<String>,
 }
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct CoursesMeetingSection {
-    pub code: OptionWrapper<String>,
+    pub code: Option<String>,
     pub instructors: Vec<String>,
     pub times: Vec<Time>,
-    pub size: OptionWrapper<i64>,
-    pub enrollment: OptionWrapper<i64>,
-    pub waitlist_option: OptionWrapper<bool>,
-    pub delivery: OptionWrapper<String>,
+    pub size: Option<i64>,
+    pub enrollment: Option<i64>,
+    pub waitlist_option: Option<bool>,
+    pub delivery: Option<String>,
 }
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct Time {
-    pub day: OptionWrapper<String>,
-    pub start: OptionWrapper<i64>,
-    pub end: OptionWrapper<i64>,
-    pub duration: OptionWrapper<i64>,
-    pub location: OptionWrapper<String>,
+    pub day: Option<String>,
+    pub start: Option<i64>,
+    pub end: Option<i64>,
+    pub duration: Option<i64>,
+    pub location: Option<String>,
 }
 
 // [ TEXTBOOKS ]
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct Textbook {
-    pub id: OptionWrapper<String>,
-    pub isbn: OptionWrapper<String>,
-    pub title: OptionWrapper<String>,
-    pub edition: OptionWrapper<i64>,
-    pub author: OptionWrapper<String>,
-    pub image: OptionWrapper<String>,
-    pub price: OptionWrapper<f64>,
-    pub url: OptionWrapper<String>,
+    pub id: Option<String>,
+    pub isbn: Option<String>,
+    pub title: Option<String>,
+    pub edition: Option<i64>,
+    pub author: Option<String>,
+    pub image: Option<String>,
+    pub price: Option<f64>,
+    pub url: Option<String>,
     pub courses: Vec<TextbooksCourse>,
-    pub last_updated: OptionWrapper<String>,
+    pub last_updated: Option<String>,
 }
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct TextbooksCourse {
-    pub id: OptionWrapper<String>,
-    pub code: OptionWrapper<String>,
-    pub requirement: OptionWrapper<String>,
+    pub id: Option<String>,
+    pub code: Option<String>,
+    pub requirement: Option<String>,
     pub meeting_sections: Vec<TextbooksMeetingSection>,
 }
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct TextbooksMeetingSection {
-    pub code: OptionWrapper<String>,
+    pub code: Option<String>,
     pub instructors: Vec<String>,
 }
 
@@ -170,75 +153,75 @@ pub struct TextbooksMeetingSection {
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct Exam {
-    pub id: OptionWrapper<String>,
-    pub course_id: OptionWrapper<String>,
-    pub course_code: OptionWrapper<String>,
-    pub campus: OptionWrapper<String>,
-    pub date: OptionWrapper<String>,
-    pub start: OptionWrapper<i64>,
-    pub end: OptionWrapper<i64>,
-    pub duration: OptionWrapper<i64>,
+    pub id: Option<String>,
+    pub course_id: Option<String>,
+    pub course_code: Option<String>,
+    pub campus: Option<String>,
+    pub date: Option<String>,
+    pub start: Option<i64>,
+    pub end: Option<i64>,
+    pub duration: Option<i64>,
     pub sections: Vec<ExamSection>,
-    pub last_updated: OptionWrapper<String>,
+    pub last_updated: Option<String>,
 }
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct ExamSection {
-    pub lecture_code: OptionWrapper<String>,
-    pub split: OptionWrapper<String>,
-    pub location: OptionWrapper<String>,
+    pub lecture_code: Option<String>,
+    pub split: Option<String>,
+    pub location: Option<String>,
 }
 
 // [ EVALS ]
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct Eval {
-    pub id: OptionWrapper<String>,
-    pub name: OptionWrapper<String>,
-    pub campus: OptionWrapper<String>,
+    pub id: Option<String>,
+    pub name: Option<String>,
+    pub campus: Option<String>,
     pub terms: Vec<EvalTerm>,
-    pub last_updated: OptionWrapper<String>,
+    pub last_updated: Option<String>,
 }
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct EvalTerm {
-    pub term: OptionWrapper<String>,
+    pub term: Option<String>,
     pub lectures: Vec<EvalLecture>,
 }
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct EvalLecture {
-    pub lecture_code: OptionWrapper<String>,
-    pub firstname: OptionWrapper<String>,
-    pub lastname: OptionWrapper<String>,
-    pub s1: OptionWrapper<f64>,
-    pub s2: OptionWrapper<f64>,
-    pub s3: OptionWrapper<f64>,
-    pub s4: OptionWrapper<f64>,
-    pub s5: OptionWrapper<f64>,
-    pub s6: OptionWrapper<f64>,
-    pub invited: OptionWrapper<i64>,
-    pub responses: OptionWrapper<i64>,
+    pub lecture_code: Option<String>,
+    pub firstname: Option<String>,
+    pub lastname: Option<String>,
+    pub s1: Option<f64>,
+    pub s2: Option<f64>,
+    pub s3: Option<f64>,
+    pub s4: Option<f64>,
+    pub s5: Option<f64>,
+    pub s6: Option<f64>,
+    pub invited: Option<i64>,
+    pub responses: Option<i64>,
 }
 
 // [ FOOD ]
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct Food {
-    pub id: OptionWrapper<String>,
-    pub name: OptionWrapper<String>,
-    pub description: OptionWrapper<String>,
-    pub tags: OptionWrapper<String>,
-    pub campus: OptionWrapper<String>,
-    pub address: OptionWrapper<String>,
+    pub id: Option<String>,
+    pub name: Option<String>,
+    pub description: Option<String>,
+    pub tags: Option<String>,
+    pub campus: Option<String>,
+    pub address: Option<String>,
     pub coordinates: Coordinates,
     pub hours: Hours,
-    pub image: OptionWrapper<String>,
-    pub url: OptionWrapper<String>,
-    pub twitter: OptionWrapper<String>,
-    pub facebook: OptionWrapper<String>,
+    pub image: Option<String>,
+    pub url: Option<String>,
+    pub twitter: Option<String>,
+    pub facebook: Option<String>,
     pub attributes: Vec<String>,
-    pub last_updated: OptionWrapper<String>,
+    pub last_updated: Option<String>,
 }
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
@@ -254,111 +237,111 @@ pub struct Hours {
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct Sunday {
-    pub closed: OptionWrapper<bool>,
-    pub open: OptionWrapper<i64>,
-    pub close: OptionWrapper<i64>,
+    pub closed: Option<bool>,
+    pub open: Option<i64>,
+    pub close: Option<i64>,
 }
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct Monday {
-    pub closed: OptionWrapper<bool>,
-    pub open: OptionWrapper<i64>,
-    pub close: OptionWrapper<i64>,
+    pub closed: Option<bool>,
+    pub open: Option<i64>,
+    pub close: Option<i64>,
 }
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct Tuesday {
-    pub closed: OptionWrapper<bool>,
-    pub open: OptionWrapper<i64>,
-    pub close: OptionWrapper<i64>,
+    pub closed: Option<bool>,
+    pub open: Option<i64>,
+    pub close: Option<i64>,
 }
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct Wednesday {
-    pub closed: OptionWrapper<bool>,
-    pub open: OptionWrapper<i64>,
-    pub close: OptionWrapper<i64>,
+    pub closed: Option<bool>,
+    pub open: Option<i64>,
+    pub close: Option<i64>,
 }
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct Thursday {
-    pub closed: OptionWrapper<bool>,
-    pub open: OptionWrapper<i64>,
-    pub close: OptionWrapper<i64>,
+    pub closed: Option<bool>,
+    pub open: Option<i64>,
+    pub close: Option<i64>,
 }
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct Friday {
-    pub closed: OptionWrapper<bool>,
-    pub open: OptionWrapper<i64>,
-    pub close: OptionWrapper<i64>,
+    pub closed: Option<bool>,
+    pub open: Option<i64>,
+    pub close: Option<i64>,
 }
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct Saturday {
-    pub closed: OptionWrapper<bool>,
-    pub open: OptionWrapper<i64>,
-    pub close: OptionWrapper<i64>,
+    pub closed: Option<bool>,
+    pub open: Option<i64>,
+    pub close: Option<i64>,
 }
 
 // [ SERVICES ]
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct Service {
-    pub id: OptionWrapper<String>,
-    pub name: OptionWrapper<String>,
-    pub alias: OptionWrapper<String>,
-    pub building_id: OptionWrapper<String>,
-    pub description: OptionWrapper<String>,
-    pub campus: OptionWrapper<String>,
-    pub address: OptionWrapper<String>,
-    pub image: OptionWrapper<String>,
+    pub id: Option<String>,
+    pub name: Option<String>,
+    pub alias: Option<String>,
+    pub building_id: Option<String>,
+    pub description: Option<String>,
+    pub campus: Option<String>,
+    pub address: Option<String>,
+    pub image: Option<String>,
     pub coordinates: Coordinates,
-    pub tags: OptionWrapper<String>,
+    pub tags: Option<String>,
     pub attributes: Vec<String>,
-    pub last_updated: OptionWrapper<String>,
+    pub last_updated: Option<String>,
 }
 
 // [ BUILDINGS ]
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct Building {
-    pub id: OptionWrapper<String>,
-    pub code: OptionWrapper<String>,
-    pub tags: OptionWrapper<String>,
-    pub name: OptionWrapper<String>,
-    pub short_name: OptionWrapper<String>,
+    pub id: Option<String>,
+    pub code: Option<String>,
+    pub tags: Option<String>,
+    pub name: Option<String>,
+    pub short_name: Option<String>,
     pub address: BuildingAddress,
     pub coordinates: Coordinates,
-    pub last_updated: OptionWrapper<String>,
+    pub last_updated: Option<String>,
 }
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct BuildingAddress {
-    pub street: OptionWrapper<String>,
-    pub city: OptionWrapper<String>,
-    pub province: OptionWrapper<String>,
-    pub country: OptionWrapper<String>,
-    pub postal: OptionWrapper<String>,
+    pub street: Option<String>,
+    pub city: Option<String>,
+    pub province: Option<String>,
+    pub country: Option<String>,
+    pub postal: Option<String>,
 }
 
 // [ PARKING ]
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct Parking {
-    pub id: OptionWrapper<String>,
-    pub name: OptionWrapper<String>,
-    pub alias: OptionWrapper<String>,
-    pub building_id: OptionWrapper<String>,
-    pub description: OptionWrapper<String>,
-    pub campus: OptionWrapper<String>,
-    pub address: OptionWrapper<String>,
+    pub id: Option<String>,
+    pub name: Option<String>,
+    pub alias: Option<String>,
+    pub building_id: Option<String>,
+    pub description: Option<String>,
+    pub campus: Option<String>,
+    pub address: Option<String>,
     pub coordinates: Coordinates,
-    pub last_updated: OptionWrapper<String>,
+    pub last_updated: Option<String>,
 }
 
 #[derive(Default, Debug, Clone, Serialize, Deserialize)]
 pub struct Coordinates {
-    pub latitude: OptionWrapper<f64>,
-    pub longitude: OptionWrapper<f64>,
+    pub latitude: Option<f64>,
+    pub longitude: Option<f64>,
 }
