@@ -7,6 +7,7 @@ use reqwest::blocking::Client;
 use reqwest::Error;
 
 pub type Parameters<'a> = Vec<(&'a str, &'a str)>;
+pub type NikelResult<T> = Result<Response<T>, Error>;
 
 pub struct NikelAPI {
     client: Client
@@ -31,32 +32,32 @@ impl NikelAPI {
         format!("https://nikel.ml/api/{}?{}", endpoint, NikelAPI::encode_params(params))
     }
 
-    fn get<T: DeserializeOwned>(&self, endpoint: String, params: Parameters) -> Result<Response<T>, Error> {
+    fn get<T: DeserializeOwned>(&self, endpoint: String, params: Parameters) -> NikelResult<T> {
         self.client.get(&NikelAPI::get_url(endpoint, params)).send()?.json::<Response<T>>()
     }
 
-    pub fn courses(&self, params: Parameters) -> Result<Response<Course>, Error> {
+    pub fn courses(&self, params: Parameters) -> NikelResult<Course> {
         self.get("courses".to_owned(), params)
     }
-    pub fn textbooks(&self, params: Parameters) -> Result<Response<Textbook>, Error> {
+    pub fn textbooks(&self, params: Parameters) -> NikelResult<Textbook> {
         self.get("textbooks".to_owned(), params)
     }
-    pub fn exams(&self, params: Parameters) -> Result<Response<Exam>, Error> {
+    pub fn exams(&self, params: Parameters) -> NikelResult<Exam> {
         self.get("exams".to_owned(), params)
     }
-    pub fn evals(&self, params: Parameters) -> Result<Response<Eval>, Error> {
+    pub fn evals(&self, params: Parameters) -> NikelResult<Eval> {
         self.get("evals".to_owned(), params)
     }
-    pub fn food(&self, params: Parameters) -> Result<Response<Food>, Error> {
+    pub fn food(&self, params: Parameters) -> NikelResult<Food> {
         self.get("food".to_owned(), params)
     }
-    pub fn services(&self, params: Parameters) -> Result<Response<Service>, Error> {
+    pub fn services(&self, params: Parameters) -> NikelResult<Service> {
         self.get("services".to_owned(), params)
     }
-    pub fn buildings(&self, params: Parameters) -> Result<Response<Building>, Error> {
+    pub fn buildings(&self, params: Parameters) -> NikelResult<Building> {
         self.get("buildings".to_owned(), params)
     }
-    pub fn parking(&self, params: Parameters) -> Result<Response<Parking>, Error> {
+    pub fn parking(&self, params: Parameters) -> NikelResult<Parking> {
         self.get("parking".to_owned(), params)
     }
 
