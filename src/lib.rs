@@ -6,6 +6,8 @@ use serde::de::DeserializeOwned;
 use reqwest::blocking::Client;
 use reqwest::Error;
 
+pub mod static;
+
 pub type Parameters<'a> = Vec<(&'a str, &'a str)>;
 pub type NikelResult<T> = Result<Response<T>, Error>;
 
@@ -61,6 +63,31 @@ impl NikelAPI {
         self.get("parking".to_owned(), params)
     }
 
+}
+
+pub fn courses(params: Parameters) -> NikelResult<Course> {
+    NikelAPI::new().get("courses".to_owned(), params)
+}
+pub fn textbooks(params: Parameters) -> NikelResult<Textbook> {
+    NikelAPI::new().get("textbooks".to_owned(), params)
+}
+pub fn exams(params: Parameters) -> NikelResult<Exam> {
+    NikelAPI::new().get("exams".to_owned(), params)
+}
+pub fn evals(params: Parameters) -> NikelResult<Eval> {
+    NikelAPI::new().get("evals".to_owned(), params)
+}
+pub fn food(params: Parameters) -> NikelResult<Food> {
+    NikelAPI::new().get("food".to_owned(), params)
+}
+pub fn services(params: Parameters) -> NikelResult<Service> {
+    NikelAPI::new().get("services".to_owned(), params)
+}
+pub fn buildings(params: Parameters) -> NikelResult<Building> {
+    NikelAPI::new().get("buildings".to_owned(), params)
+}
+pub fn parking(params: Parameters) -> NikelResult<Parking> {
+    NikelAPI::new().get("parking".to_owned(), params)
 }
 
 // [ BEGIN DATA TYPES ]
