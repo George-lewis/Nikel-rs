@@ -6,8 +6,6 @@ use serde::de::DeserializeOwned;
 use reqwest::blocking::Client;
 use reqwest::Error;
 
-pub mod static;
-
 pub type Parameters<'a> = Vec<(&'a str, &'a str)>;
 pub type NikelResult<T> = Result<Response<T>, Error>;
 
