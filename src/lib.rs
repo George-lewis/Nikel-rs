@@ -39,53 +39,74 @@ impl NikelAPI {
     pub fn courses(&self, params: Parameters) -> NikelResult<Course> {
         self.get("courses".to_owned(), params)
     }
+
     pub fn textbooks(&self, params: Parameters) -> NikelResult<Textbook> {
         self.get("textbooks".to_owned(), params)
     }
+
     pub fn exams(&self, params: Parameters) -> NikelResult<Exam> {
         self.get("exams".to_owned(), params)
     }
+
     pub fn evals(&self, params: Parameters) -> NikelResult<Eval> {
         self.get("evals".to_owned(), params)
     }
+
     pub fn food(&self, params: Parameters) -> NikelResult<Food> {
         self.get("food".to_owned(), params)
     }
+
     pub fn services(&self, params: Parameters) -> NikelResult<Service> {
         self.get("services".to_owned(), params)
     }
+
     pub fn buildings(&self, params: Parameters) -> NikelResult<Building> {
         self.get("buildings".to_owned(), params)
     }
+
     pub fn parking(&self, params: Parameters) -> NikelResult<Parking> {
         self.get("parking".to_owned(), params)
     }
 
+    pub fn programs(&self, params: Parameters) -> NikelResult<Program> {
+        self.get("programs".to_owned(), params)
+    }
 }
 
 pub fn courses(params: Parameters) -> NikelResult<Course> {
     NikelAPI::new().get("courses".to_owned(), params)
 }
+
 pub fn textbooks(params: Parameters) -> NikelResult<Textbook> {
     NikelAPI::new().get("textbooks".to_owned(), params)
 }
+
 pub fn exams(params: Parameters) -> NikelResult<Exam> {
     NikelAPI::new().get("exams".to_owned(), params)
 }
+
 pub fn evals(params: Parameters) -> NikelResult<Eval> {
     NikelAPI::new().get("evals".to_owned(), params)
 }
+
 pub fn food(params: Parameters) -> NikelResult<Food> {
     NikelAPI::new().get("food".to_owned(), params)
 }
+
 pub fn services(params: Parameters) -> NikelResult<Service> {
     NikelAPI::new().get("services".to_owned(), params)
 }
+
 pub fn buildings(params: Parameters) -> NikelResult<Building> {
     NikelAPI::new().get("buildings".to_owned(), params)
 }
+
 pub fn parking(params: Parameters) -> NikelResult<Parking> {
     NikelAPI::new().get("parking".to_owned(), params)
+}
+
+pub fn programs(params: Parameters) -> NikelResult<Program> {
+    NikelAPI::new().get("programs".to_owned(), params)
 }
 
 // [ BEGIN DATA TYPES ]
@@ -370,4 +391,19 @@ pub struct Parking {
 pub struct Coordinates {
     pub latitude: Option<f64>,
     pub longitude: Option<f64>,
+}
+
+// [ PROGRAMS ]
+
+#[derive(Default, Debug, Clone, Serialize, Deserialize)]
+pub struct Program {
+    pub id: Option<String>,
+    pub name: Option<String>,
+    #[serde(rename = "type")]
+    pub type_field: Option<String>,
+    pub campus: Option<String>,
+    pub description: Option<String>,
+    pub enrollment: Option<String>,
+    pub completion: Option<String>,
+    pub last_updated: Option<String>,
 }
